@@ -34,6 +34,7 @@ export class RegisterPage {
   user: Observable<User>;
   isReadyToSave: boolean;
   imageDataview:any;
+  liba:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public platform:Platform,
@@ -43,7 +44,7 @@ export class RegisterPage {
     private DomSanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private afs: AngularFirestore, ) {
-   
+     
       this.todo = this.formBuilder.group({
         profilePic: [''],
         email: ['', Validators.compose([Validators.required,  this.emailValidator])],
@@ -89,8 +90,23 @@ export class RegisterPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
+  upload(image) {
+    let storageRef = firebase.storage().ref();
+    // Create a timestamp as filename
+    const filename = Math.floor(Date.now() / 1000);
+
+    // Create a reference to 'images/todays-date.jpg'
+    const imageRef = storageRef.child(`images/${filename}.jpg`);
+
+    imageRef.putString(image, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
+      imageRef.getDownloadURL().then(res=>{
+        console.log(res);
+      })
+    });
+    
+  }
   getPicture() {
-    console.log('คลิก----');
+    console.log('คลิก---->');
     const options: CameraOptions = {
       quality: 60,
       //destinationType: this.camera.DestinationType.FILE_URI,//call file
@@ -110,12 +126,17 @@ export class RegisterPage {
         this.imageDataview=(data);
       }, (err) => {
         console.log('select form allalum');
-        this.camera.getPicture({
+        
+      return  this.camera.getPicture({
           sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
-          destinationType: this.camera.DestinationType.FILE_URI}).then((data) => {
-         // this.todo.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-          console.log(data);
-          this.imageDataview=data;
+          destinationType: this.camera.DestinationType.DATA_URL,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE }).then((data) => {
+         this.todo.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
+        // this.todo.patchValue({ 'profilePic': data });
+        // console.log(data);
+          this.imageDataview='data:image/jpg;base64,'+data;
+          this.upload(this.imageDataview);
         })
       })
        
@@ -149,7 +170,7 @@ export class RegisterPage {
     const phoneNumber=fillform.phoneNumber;
     const photoURL=fillform.profilePic;
     const displayName=fillform.displayName;
-    const Type=fillform.Type;
+    //const Type=fillform.Type;
     firebase.auth().createUserWithEmailAndPassword(email, password).then(response=>{
       console.log(response); 
       let user = response.user;

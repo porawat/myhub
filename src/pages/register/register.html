@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-          <img [src]="DomSanitizer.bypassSecurityTrustUrl(imageDataview)"/>
+          <!-- <img [src]="DomSanitizer.bypassSecurityTrustUrl(imageDataview)"/> -->
           <div  *ngIf="this.todo.controls.profilePic.value"><img src="{{imageDataview}}" class="profile-image"></div>
         </div>
         <ion-item>
