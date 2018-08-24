@@ -12,6 +12,7 @@ import { switchMap} from 'rxjs/operators';
 import { User } from '../../models/model';
 
 import { Camera,CameraOptions } from '@ionic-native/camera';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { HomePage } from '../../pages/home/home';
 /**
@@ -39,6 +40,7 @@ export class RegisterPage {
     private afAuth: AngularFireAuth,
     public camera: Camera,
     public viewCtrl: ViewController,
+    private DomSanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
     private afs: AngularFirestore, ) {
    
@@ -99,37 +101,25 @@ export class RegisterPage {
       saveToPhotoAlbum:true,
       targetWidth: 48,
       targetHeight: 48
-    }
+    } 
     if (Camera['installed']()) {
-      this.camera.getPicture(options).then((imageData) => {
-        // imageData is either a base64 encoded string or a file URI
-        // If it's base64 (DATA_URL):
-        console.log(imageData);
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
-       }, (err) => {
-        // Handle error
-       });
-    }
-    
-    /*
-    if (Camera['installed']()) {
-      console.log('มีกล้อง');
+      console.log('ถ่ายรูป');
       this.camera.getPicture(options).then((data) => {
         this.todo.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
         console.log(data);
+        this.imageDataview=(data);
       }, (err) => {
-        console.log('ไม่มีกล้อง');
+        console.log('select form allalum');
         this.camera.getPicture({
-          destinationType: this.camera.DestinationType.FILE_URI,
-          encodingType: this.camera.EncodingType.PNG,
-          mediaType: this.camera.MediaType.PICTURE}).then((data) => {
-          this.todo.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
+          sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
+          destinationType: this.camera.DestinationType.FILE_URI}).then((data) => {
+         // this.todo.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
           console.log(data);
-          
+          this.imageDataview=data;
         })
       })
-       */
-    else {
+       
+    } else {
       console.log('เลือกจากเครื่อง');
       this.fileInput.nativeElement.click();
     }

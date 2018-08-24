@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "141720789322",
-    "firebase_url": "https://samco-line-bot.firebaseio.com",
-    "project_id": "samco-line-bot",
-    "storage_bucket": "samco-line-bot.appspot.com"
+    "project_number": "38554126",
+    "firebase_url": "https://aphub-1459a.firebaseio.com",
+    "project_id": "aphub-1459a",
+    "storage_bucket": "aphub-1459a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:141720789322:android:99e169604a6af911",
+        "mobilesdk_app_id": "1:38554126:android:a046f3217c04646f",
         "android_client_info": {
-          "package_name": "io.gzon.aphub"
+          "package_name": "gzon.aphub"
         }
       },
       "oauth_client": [
         {
-          "client_id": "141720789322-9gmfihberdfj98qsske6rom7do4vp7nb.apps.googleusercontent.com",
+          "client_id": "38554126-gmpn04v11u8ir79v121q2pikmd9sm29r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAyNrQIt9qhjbNYl0TQ9u1m-sr6lsIzjko"
+          "current_key": "AIzaSyAI53Ch7cP6GlrHic98NnMZOmY3G11qTQs"
         }
       ],
       "services": {
