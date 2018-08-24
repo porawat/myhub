@@ -1,0 +1,59 @@
+
+<ion-header>
+    <ion-navbar>
+      <ion-title>register</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+    <h3 style="text-align: center">ลงทะเบียนผู้ใช้</h3>
+   
+ <div id="signInForm">
+   <ion-list>
+    <form [formGroup]="todo" (ngSubmit)="register()">
+        <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
+        <div class="profile-image-wrapper" (click)="getPicture()">
+          <div class="profile-image-placeholder" *ngIf="!this.todo.controls.profilePic.value">
+            <ion-icon name="add"></ion-icon>
+            <div class="tile">
+              <div class="font-effect-anaglyph">
+                CHOOSE IMAGE
+              </div>
+            </div>
+          </div>
+          <div  *ngIf="this.todo.controls.profilePic.value"><img src="{{imageDataview}}" class="profile-image"></div>
+        </div>
+        <ion-item>
+            <ion-label floating>Mobile</ion-label>
+            <ion-input type="text" [(ngModel)]="registerForm.phoneNumber" name="phoneNumber" formControlName="phoneNumber"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="registerForm.email" name="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Display Name</ion-label>
+            <ion-input type="text" [(ngModel)]="registerForm.displayName" name="displayName" formControlName="displayName"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input type="password" [(ngModel)]="registerForm.password" name="password" formControlName="password"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>confirmPassword</ion-label>
+                <ion-input type="password" [(ngModel)]="registerForm.confirmPassword" name="confirmPassword" formControlName="confirmPassword"></ion-input>
+                
+              </ion-item> 
+              <ion-item>
+                  <ion-label>หาห้องพัก</ion-label>
+                  <ion-toggle value="true" checked="true" [(ngModel)]="registerForm.Type" name="Type" formControlName="Type"></ion-toggle>
+                </ion-item>
+          <ion-item>
+            <button ion-button large block type="submit" [disabled]="!isReadyToSave" strong>ลงทะเบียน</button>
+          </ion-item>
+        </form>
+        </ion-list>
+</div>
+  </ion-content>
+  
