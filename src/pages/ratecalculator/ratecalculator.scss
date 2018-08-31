@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Amaranth|Baloo+Tammudu|Kanit:400,400i,700|Kosugi+Maru|Prompt:400,400i,700|Roboto+Mono:400,400i,500,500i,700,700i|Volkhov&subset=thai');
+@import url('http://58.97.34.218:88/gzonhub/css/pure-min.css');
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
+page-ratecalculator {
+    span.matchhost{
+        font-family: Kanit; 
+        color: rgb(64, 64, 250) ;
+        font-size: 12px;
+        cursor: pointer;
+    }
+    span.matchvisit{
+        font-family: Kanit; 
+        color: rgb(235, 30, 3) ;
+        font-size: 12px;
+        cursor: pointer;
+    }
+    span.matchvs{
+        font-family: Roboto+Mono;  
+        font-style: italic;
+        color: rgb(13, 13, 14);
+        font-size: 10px;
+    }
+    span.selectteam{
+        font-family: Kanit; 
+        color: rgb(235, 30, 3) ;
+        font-size: 20px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    span.blue{
+        font-family: Prompt;  
+       font-weight:bold;
+        color: rgb(64, 64, 250);
+        font-size: 32px;
+    }
+    span.red{
+        font-family: Prompt;  
+        font-weight: bold;
+        color: rgb(235, 30, 3);
+        font-size: 32px;
+        
+    }
+    span.label{
+        font-family: Prompt; 
+       
+    }
+    .labelcal{
+        font-family: Kanit; 
+        font-size: 14px;
+    }
+    span.hadicap{
+        font-family:Kanit;
+        font-size: 16px;
+    }
+    .numcal{
+        font-family:Kanit;
+        font-size: 16px;
+    }
+    .numcaldanger{
+        font-family:Kanit;
+        font-size: 16px;
+        color: crimson;
+    }
+}

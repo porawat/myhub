@@ -89,9 +89,7 @@ export class LoginPage {
       toast.present();
       
     //  myLoader.dismiss();
-    });
-   
-    
+    });   
   }
   register(){
     this.navCtrl.setRoot(RegisterPage);
@@ -153,7 +151,8 @@ export class LoginPage {
       localStorage.setItem('user', JSON.stringify(data));
      // this.navCtrl.setRoot(FeedPage);
     }else{
-    //  this.storage.set("user", data);
+      this.storage.set("user", data);
+      localStorage.setItem('user', JSON.stringify(data));
     //  this.navCtrl.setRoot(FeedPage);
     }
     return userRef.set(data, { merge: true })    

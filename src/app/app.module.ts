@@ -7,6 +7,10 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { CompetitionPage } from '../pages/competition/competition';
+import { CompeterPage } from '../pages/competer/competer';
+import { RatecalculatorPage } from '../pages/ratecalculator/ratecalculator';
+import {LivescorePage} from '../pages/livescore/livescore';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,6 +24,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Sim } from '@ionic-native/sim';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera} from '@ionic-native/camera';
+import { DatePicker } from '@ionic-native/date-picker';
+import {MyDatePickerModule} from 'mydatepicker';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,11 @@ import { Camera} from '@ionic-native/camera';
     HomePage,
     ListPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    CompetitionPage,
+    CompeterPage,
+    RatecalculatorPage,
+    LivescorePage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +47,9 @@ import { Camera} from '@ionic-native/camera';
     AngularFireModule.initializeApp(Firebase_Config.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MyDatePickerModule,
+   
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,7 +57,11 @@ import { Camera} from '@ionic-native/camera';
     HomePage,
     ListPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    CompetitionPage,
+    CompeterPage,
+    RatecalculatorPage,
+    LivescorePage
   ],
   providers: [
     StatusBar,
@@ -53,7 +70,10 @@ import { Camera} from '@ionic-native/camera';
     FireserviceProvider,
     Sim,
     Facebook,
-    Camera
+    InAppBrowser,
+    Camera,
+    DatePicker,
+    
   ]
 })
 export class AppModule {}

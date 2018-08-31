@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestoreDocument,AngularFirestore,AngularFirestoreCollection } from "angularfire2/firestore";
 import { User, Chat } from "../../models/model";
 import { Firebase_Config } from '../../app/app.firebase';
+import  firebase  from 'firebase/app';
 @Injectable()
 export class FireserviceProvider {
 
@@ -11,7 +12,7 @@ export class FireserviceProvider {
   chats: AngularFirestoreCollection<Chat>;
  private chatDoc: AngularFirestoreDocument<Chat>;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore,) {
 
     this.users = this.db.collection<User>(Firebase_Config.users_endpoint);
     this.chats = this.db.collection<Chat>(Firebase_Config.chats_endpoint);
@@ -20,4 +21,8 @@ export class FireserviceProvider {
   addUser(payload) {
     return this.users.add(payload);
   } //addUser
+  getmatch(){
+   return firebase.firestore().collection("/match/TonFc/competition/").orderBy("timecom", "asc");
+       
+      }  
 }

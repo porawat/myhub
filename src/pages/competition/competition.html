@@ -1,0 +1,137 @@
+<!--
+  Generated template for the CompetitionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>คู่ที่เปิดให้แทง</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <div id="signInForm">
+    <ion-list>
+     <form [formGroup]="todo" (ngSubmit)="savecomp()">
+        <div class="container">
+            <div class="wrapper1">
+                <div class="box"> 
+                    <ion-item>
+                    <ion-label>ลีก</ion-label>
+                    <ion-select (ionChange)="myleague(registerForm.league)" (change)="myleague(registerForm.league)" [(ngModel)]="registerForm.league" formControlName="league" name="league">
+                      <ion-option  *ngFor="let league of selectleague" value="{{league.Lid}}">{{league.Name}}</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="wrapper">
+              <div class="box a">           
+                  <ion-label>วันแข่ง</ion-label>
+                  <my-date-picker name="daycom" [options]="myDatePickerOptions"
+                  [(ngModel)]="registerForm.daycom" formControlName="daycom" required></my-date-picker>   
+              </div>
+              <div class="box b">
+                <ion-item>
+                  <ion-label floating>เวลาแข่ง</ion-label>
+                  <ion-input type="text" [(ngModel)]="registerForm.timecom" name="timecom" formControlName="timecom"></ion-input>
+                </ion-item></div>
+              
+            </div>
+          </div>
+          <div class="container">
+             
+              <div class="wrapper">
+                <div class="box a">
+                    <ion-item>
+                        <ion-label floating>เจ้าบ้าน</ion-label>
+                        <ion-select (change)="myhost()" [(ngModel)]="registerForm.host" formControlName="host" name="host">
+                            <ion-option  *ngFor="let team of hostteam" value="{{team.id}}">{{team.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                        
+                     
+                    </div>
+                <div class="box b">
+                    <ion-item>
+                        <ion-label floating>มาเยือน</ion-label>
+                         <ion-select (change)="myhost(registerForm.visit)" [(ngModel)]="registerForm.visit" formControlName="visit" name="visit">
+                            <ion-option  *ngFor="let team of hostteam" value="{{team.id}}">{{team.name}}</ion-option>
+                          </ion-select>
+                      </ion-item>
+                
+              </div>
+            </div>
+      </div>
+      <div class="container">
+       <div class="wrapper3">
+          <div class="box a">
+            <ion-item>
+              <ion-label floating>หน้าบอล</ion-label>
+              <ion-input type="text" [(ngModel)]="registerForm.rate" name="rate" formControlName="rate"></ion-input>
+            </ion-item>
+          </div>
+          <div class="box b">
+              <ion-item>
+                  <ion-label floating>เจ้าบ้าน</ion-label>
+                  <ion-input type="text" [(ngModel)]="registerForm.hostrate" name="hostrate" formControlName="hostrate"></ion-input>
+                </ion-item>
+          </div>
+          <div class="box b">
+              <ion-item>
+                  <ion-label floating>ทีมเยือน</ion-label>
+                  <ion-input type="text" [(ngModel)]="registerForm.visitrate" name="visitrate" formControlName="visitrate"></ion-input>
+                </ion-item>
+          </div>
+          
+        </div>   
+      </div>      
+             
+                                   
+           <ion-item>
+             <button ion-button large block type="submit" [disabled]="!isReadyToSave" strong>add</button>
+           </ion-item>
+         </form>
+         </ion-list>
+ </div>
+ <table >
+  <thead >
+  <tr>
+    <th style="width:10%">วันที่</th>
+    <th style="width:10%">เวลา</th>
+    <th style="width:50%">คู่แข่ง</th> 
+    
+    <th style="width:10%">อัตรา</th>
+    <th style="width:10%">เจ้าบ้าน</th>
+    <th style="width:10%">ทีมเยือน</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of datashow">
+    <td>{{data.date}}</td>
+    <td>{{data.timecom}}</td>
+    <td>{{data.hostname}} VS {{data.visitname}}</td>   
+   
+    <td>{{data.rate}}</td>
+    <td>{{data.hostrate}}</td>
+    <td>{{data.visitrate}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="container">
+    <div class="wrapper1">
+        <div class="box"> 
+            <button ion-button large block type="button" [disabled]="!datashow" strong (click)="savematch()">submit</button>
+        </div>
+    </div>
+</div>
+<div *ngFor="let post of Fire2">
+
+    {{ post | json }}
+  
+  </div>
+  <button ion-button large block type="button" (click)="test()">test</button>
+</ion-content>

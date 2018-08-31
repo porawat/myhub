@@ -3,16 +3,53 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title><span class="label">ตารางการแข่งขัน</span></ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content>
+  <!-- <div *ngFor="let match of Fire2"> -->
+ 
+      <table class="pure-table pure-table-bordered" width="100%">
+          <thead>
+              <tr>
+                  <th width="10%">*</th>
+                  <th width="50%">คู่</th>
+                  <th width="20%">ต่อ</th>
+                  <th width="10%">เหย้า</th>
+                  <th width="10%">เยือน</th>
+              </tr>
+          </thead>
+      
+          <tbody>
+              <tr *ngFor="let match of Fire2">
+                  <td><span class="matchtime">{{match.timecom}}</span></td>
+                  <td>
+                    <span class="matchhost" *ngIf="match.hostrate > match.visitrate"> {{match.hostname}}</span> 
+                   <span class="matchvisit" *ngIf="match.hostrate < match.visitrate"> {{match.hostname}}</span> 
+         
+                    <span class="matchvs"> VS </span> 
+                    <span class="matchhost" *ngIf="match.hostrate < match.visitrate">{{match.visitname}}</span>
+                    <span class="matchvisit" *ngIf="match.hostrate > match.visitrate"> {{match.visitname}}</span>
+                    
+                  </td>
+                  <td><span class="rate">{{match.rate}}</span></td>
+                  <td>
+                      <span class="matchhost" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'host','blue')">{{match.hostrate}} </span>
+                      <span class="matchvisit" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'host','red')">{{match.hostrate}} </span>
+                </td>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+                  <td>
+                     
+                      <span class="matchvisit" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'visit','red')">{{match.visitrate}}</span>
+                      <span class="matchhost" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'visit','blue')">{{match.visitrate}}</span> 
+                </td>
+              </tr>
+      
+          </tbody>
+      </table>
+  
+  <!-- </div> -->
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  
 </ion-content>

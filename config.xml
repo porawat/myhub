@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.gzon.aphub" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
+    <name>Gzon Lotto</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.229.117:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -19,6 +19,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="loadUrlTimeoutValue" value="60000" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -83,9 +84,6 @@
         </host>
     </universal-links>
     <preference name="AndroidLaunchMode" value="singleTask" />
-    <allow-navigation href="http://192.168.229.117:8100" sessionid="1de5c35d" />
-    <allow-navigation href="http://192.168.229.117:8101" sessionid="f645b1e5" />
-    <allow-navigation href="http://192.168.11.239:8101" sessionid="a0248b1a" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
@@ -106,4 +104,5 @@
     <plugin name="cordova-plugin-camera" spec="git+https://github.com/apache/cordova-plugin-camera.git">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
+    <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
 </widget>

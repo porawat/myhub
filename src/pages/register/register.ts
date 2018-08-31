@@ -1,9 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform ,ViewController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform ,ViewController,ToastController} from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import firebase from 'firebase/app';
-import { firestore } from 'firebase';
-import { Storage } from "@ionic/storage";
 import { AngularFireAuth } from 'angularfire2/auth';
 import AuthProvider = firebase.auth.AuthProvider;
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
@@ -14,7 +12,7 @@ import { User } from '../../models/model';
 import { Camera,CameraOptions } from '@ionic-native/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { HomePage } from '../../pages/home/home';
+import { LoginPage } from '../../pages/login/login';
 /**
  * Generated class for the RegisterPage page.
  *
@@ -35,11 +33,13 @@ export class RegisterPage {
   isReadyToSave: boolean;
   imageDataview:any;
   liba:any;
+  image_Url_save:any;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public platform:Platform,
     private afAuth: AngularFireAuth,
     public camera: Camera,
+    private toastCtrl: ToastController,
     public viewCtrl: ViewController,
     private DomSanitizer: DomSanitizer,
     private formBuilder: FormBuilder,
@@ -88,42 +88,26 @@ export class RegisterPage {
     }
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
-  }
-  upload(image) {
-    let storageRef = firebase.storage().ref();
-    // Create a timestamp as filename
-    const filename = Math.floor(Date.now() / 1000);
-
-    // Create a reference to 'images/todays-date.jpg'
-    const imageRef = storageRef.child(`images/${filename}.jpg`);
-
-    imageRef.putString(image, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
-      imageRef.getDownloadURL().then(res=>{
-        console.log(res);
-      })
-    });
-    
+  //  console.log('ionViewDidLoad RegisterPage');
   }
   getPicture() {
-    console.log('คลิก---->');
+   // console.log('คลิก---->');
     const options: CameraOptions = {
-      quality: 60,
-      //destinationType: this.camera.DestinationType.FILE_URI,//call file
-      destinationType: this.camera.DestinationType.FILE_URI,
+      quality: 80,
+      sourceType:this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE,
-     // sourceType:this.camera.PictureSourceType.CAMERA,
       saveToPhotoAlbum:true,
-      targetWidth: 48,
-      targetHeight: 48
+      targetWidth: 96,
+      targetHeight: 96,
     } 
     if (Camera['installed']()) {
       console.log('ถ่ายรูป');
       this.camera.getPicture(options).then((data) => {
         this.todo.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
         console.log(data);
-        this.imageDataview=(data);
+        this.imageDataview='data:image/jpg;base64,'+data;
       }, (err) => {
         console.log('select form allalum');
         
@@ -136,12 +120,12 @@ export class RegisterPage {
         // this.todo.patchValue({ 'profilePic': data });
         // console.log(data);
           this.imageDataview='data:image/jpg;base64,'+data;
-          this.upload(this.imageDataview);
+         
         })
       })
        
     } else {
-      console.log('เลือกจากเครื่อง');
+     // console.log('เลือกจากเครื่อง');
       this.fileInput.nativeElement.click();
     }
    
@@ -149,10 +133,10 @@ export class RegisterPage {
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-      console.log(readerEvent);
+     // console.log(readerEvent);
       let imageData = (readerEvent.target as any).result;
       this.todo.patchValue({ 'profilePic': imageData });
-      console.log(imageData);
+     // console.log(imageData);
       this.imageDataview=(imageData);
     };
 
@@ -162,7 +146,8 @@ export class RegisterPage {
   getProfileImageStyle() {
     return 'url(' + this.todo.controls['profilePic'].value + ')'
   }
-  register(){
+  async  register() {
+    
     console.log(this.todo.value);
     let fillform = this.todo.value;
     const email=fillform.email;
@@ -170,30 +155,67 @@ export class RegisterPage {
     const phoneNumber=fillform.phoneNumber;
     const photoURL=fillform.profilePic;
     const displayName=fillform.displayName;
-    //const Type=fillform.Type;
+  
     firebase.auth().createUserWithEmailAndPassword(email, password).then(response=>{
-      console.log(response); 
+     // console.log(response); 
       let user = response.user;
       let userid = response.user.uid;
-      console.log(userid);
+     // console.log(userid);
   if(userid){
-    let data = {
-      uid: user.uid,
-      email: user.email,
-      displayName: displayName,
-      photoURL: photoURL,
-      phoneNumber:phoneNumber,
-      emailVerified:user.emailVerified
+    if(!this.imageDataview){
+      let data = {
+        uid: user.uid,
+        email: user.email,
+        displayName: displayName,
+        phoneNumber:phoneNumber,
+        emailVerified:user.emailVerified
+      }
+      
+      const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+       userRef.set(data, { merge: true });
+       let toast = this.toastCtrl.create({
+        message: 'ลงทะเบียนสำเร็จ',
+        duration: 2000,
+        position: "top"
+      });
+      toast.present();
+      this.navCtrl.setRoot(LoginPage);
+    }else{
+      let storageRef = firebase.storage().ref();
+      const imageRef = storageRef.child(`images/${response.user.uid}.jpg`);
+      imageRef.putString(this.imageDataview, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
+        imageRef.getDownloadURL().then(res=>{      
+          this.image_Url_save =  res;
+          console.log(res);
+          let data = {
+            uid: user.uid,
+            email: user.email,
+            displayName: displayName,
+            phoneNumber:phoneNumber,
+            photoURL:this.image_Url_save,
+            emailVerified:user.emailVerified
+          }
+         // console.log(data);
+          const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+           userRef.set(data, { merge: true });
+           let toast = this.toastCtrl.create({
+            message: 'ลงทะเบียนสำเร็จ',
+            duration: 2000,
+            position: "top"
+          });
+          toast.present();
+          this.navCtrl.setRoot(LoginPage);
+        })
+      });
+      
     }
-    console.log(data);
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    userRef.set(data, { merge: true });
   }
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    });
-  }
+    }).catch(err=>{
+      console.log('Error: ', err);
+    })
+}
+
+  
+
+
 }
