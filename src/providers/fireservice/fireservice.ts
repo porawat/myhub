@@ -5,7 +5,7 @@ import { Firebase_Config } from '../../app/app.firebase';
 import  firebase  from 'firebase/app';
 @Injectable()
 export class FireserviceProvider {
-
+  datalist;
   users: AngularFirestoreCollection<User>;
  private userDoc: AngularFirestoreDocument<User>;
 
@@ -13,7 +13,7 @@ export class FireserviceProvider {
  private chatDoc: AngularFirestoreDocument<Chat>;
 
   constructor(private db: AngularFirestore,) {
-
+ 
     this.users = this.db.collection<User>(Firebase_Config.users_endpoint);
     this.chats = this.db.collection<Chat>(Firebase_Config.chats_endpoint);
     console.log('Hello FireserviceProvider Provider');
@@ -21,8 +21,9 @@ export class FireserviceProvider {
   addUser(payload) {
     return this.users.add(payload);
   } //addUser
-  getmatch(){
-   return firebase.firestore().collection("/match/TonFc/competition/").orderBy("timecom", "asc");
-       
-      }  
+
+  getmatch(part) {
+    return  this.datalist = firebase.firestore().collection(part);
+    
+  }
 }

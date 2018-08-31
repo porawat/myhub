@@ -10,6 +10,7 @@ import { LoginPage } from '../pages/login/login';
 import { CompeterPage } from '../pages/competer/competer';
 import { LivescorePage } from '../pages/livescore/livescore';
 import { CompetitionPage } from '../pages/competition/competition';
+import {PlaystepPage} from '../pages/playstep/playstep';
 @Component({
   templateUrl: 'app.html'
 })
@@ -18,7 +19,7 @@ export class MyApp {
 
   rootPage: any =  HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any,icon: string,color:any}>;
 
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
@@ -29,10 +30,10 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'ตั้งค่า', component: CompetitionPage },
-      { title: 'Livescore', component: LivescorePage }
+      { title: 'Home', component: HomePage ,icon:'football',color:'danger'},
+      { title: 'step', component: PlaystepPage ,icon:'fastforward',color:'ballstep'},
+      { title: 'ตั้งค่า', component: CompetitionPage ,icon:'cog',color:'dark'},
+      { title: 'Livescore', component: LivescorePage ,icon:'globe',color:'secondary'}
     ];
 
   }

@@ -11,6 +11,7 @@ import { CompetitionPage } from '../pages/competition/competition';
 import { CompeterPage } from '../pages/competer/competer';
 import { RatecalculatorPage } from '../pages/ratecalculator/ratecalculator';
 import {LivescorePage} from '../pages/livescore/livescore';
+import {PlaystepPage} from '../pages/playstep/playstep';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -38,7 +39,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     CompetitionPage,
     CompeterPage,
     RatecalculatorPage,
-    LivescorePage
+    LivescorePage,
+    PlaystepPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     CompetitionPage,
     CompeterPage,
     RatecalculatorPage,
-    LivescorePage
+    LivescorePage,
+    PlaystepPage
   ],
   providers: [
     StatusBar,

@@ -63,19 +63,9 @@ export class RatecalculatorPage {
       this.summoney=(this.money*this.pushrate).toFixed(2);
   }
 
-  onChange(x){
+  moneychannel(x){
     console.log(x);
-    if(x<=49 || x>=1000){
-      let toast = this.toastCtrl.create({
-        message: 'ตรวจสอบจำนวนเงิน',
-        duration: 2000,
-        position: "top"
-      });
-      toast.present();
-      return false;
-    }else{
-
-    }
+    
     this.summoney=(x*this.pushrate).toFixed(2);
   }
   ionViewDidEnter(){   

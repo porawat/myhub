@@ -55,11 +55,9 @@ export class LoginPage {
         })
       )  
   }
- 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
   loginUser(){
     console.log(this.todo.value);
     const email=this.todo.value.email;
@@ -95,16 +93,10 @@ export class LoginPage {
     this.navCtrl.setRoot(RegisterPage);
   }
   signInWithGoogle() :Promise<any>{
-  //console.log(Cordova);
-    // var provider = new firebase.auth.GoogleAuthProvider();
      return this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
-   //  return this.oAuthLogin(provider); 
   }
   signInWithFacebook() :Promise<any>{
-    //console.log(Cordova);
-      // var provider = new firebase.auth.GoogleAuthProvider();
-       return this.oauthSignIn(new firebase.auth.FacebookAuthProvider());
-     //  return this.oAuthLogin(provider); 
+       return this.oauthSignIn(new firebase.auth.FacebookAuthProvider());  
     }
   private oauthSignIn(provider: AuthProvider) {
 		if (!(<any>window).cordova) {
