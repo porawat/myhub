@@ -1,5 +1,5 @@
-import { Component ,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ViewController,ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the RatecalculatorPage page.
@@ -25,69 +25,74 @@ export class RatecalculatorPage {
   visitname;
   visitrate;
   selectteam;
-  pushrate:number;
+  pushrate: number;
   color;
-  money:number=50;
-  summoney:any;
-  constructor(public navCtrl: NavController, 
+  money: number = 50;
+  summoney: any;
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private toastCtrl: ToastController,
-    public viewCtrl: ViewController,) {
-      
-      let data:any;
-      data =this.navParams.data.data;
-      //this.datamatch=data.match;
-    
-  if(data.play=='host'){
-  this.selectteam=data.match.hostname;
-  this.pushrate=data.match.hostrate;
-  }else{
-    this.selectteam=data.match.visitname;
-    this.pushrate=data.match.visitrate;
-  }
-  
-     this. hostname=data.match.hostname;
-     this. hostrate=data.match.hostrate;
-     this. league=data.match.league;
-     this. matchid=data.match.matchid;
-     this. rate=data.match.rate;
-     this. visitname=data.match.visitname;
-     this. visitrate=data.match. visitrate;
-  
-  
-  
-      this.color=data.color;
-      this.player=data.play;
+    public viewCtrl: ViewController, ) {
 
-      console.log(this.pushrate);
-      this.summoney=(this.money*this.pushrate).toFixed(2);
-  }
+    let data: any;
+    data = this.navParams.data.data;
+    //this.datamatch=data.match;
 
-  moneychannel(x){
+    if (data.play == 'host') {
+      this.selectteam = data.match.hostname;
+      this.pushrate = data.match.hostrate;
+    } else {
+      this.selectteam = data.match.visitname;
+      this.pushrate = data.match.visitrate;
+    }
+
+    this.hostname = data.match.hostname;
+    this.hostrate = data.match.hostrate;
+    this.league = data.match.league;
+    this.matchid = data.match.matchid;
+    this.rate = data.match.rate;
+    this.visitname = data.match.visitname;
+    this.visitrate = data.match.visitrate;
+
+
+
+    this.color = data.color;
+    this.player = data.play;
+
+    console.log(this.pushrate);
+    this.summoney = (this.money * this.pushrate).toFixed(2);
+  }
+  moneychannel(x) {
     console.log(x);
-    
-    this.summoney=(x*this.pushrate).toFixed(2);
+    this.summoney = (x * this.pushrate).toFixed(2);
   }
-  ionViewDidEnter(){   
+  ionViewDidEnter() {
   }
-  ionViewDidLoad() {   
+  ionViewDidLoad() {
   }
-  dimm(){
+  openModal() {
 
+  }
+  closeModal() {
+    this.viewCtrl.dismiss({
+      name: 'kim', last: '@kim'
+    });
+  }
+  dimm() {
 
-    if(this.money<=49 || this.money>=1000) {
+    if (this.money <= 49 || this.money >= 2001) {
       let toast = this.toastCtrl.create({
         message: 'ตรวจสอบจำนวนเงิน',
         duration: 2000,
         position: "top"
       });
       toast.present();
-    }else{
-      let   data={
-        name:'kim',last:'@kim'
-         }
-         this.viewCtrl.dismiss(data);
+    } else {
+      let data = {
+        name: 'kim', last: '@kim'
+      }
+      this.viewCtrl.dismiss(data);
     }
-  
+
   }
 }

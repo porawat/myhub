@@ -16,7 +16,7 @@ import { User } from '../../models/model';
 import { HomePage } from '../../pages/home/home';
 import { RegisterPage } from '../../pages/register/register';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import { Cordova } from '@ionic-native/core';
+
 
 
 

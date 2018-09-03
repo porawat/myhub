@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform ,Modal, ModalController,PopoverController} from 'ionic-angular';
+import { Nav, Platform, Modal, ModalController, PopoverController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,19 +10,19 @@ import { LoginPage } from '../pages/login/login';
 import { CompeterPage } from '../pages/competer/competer';
 import { LivescorePage } from '../pages/livescore/livescore';
 import { CompetitionPage } from '../pages/competition/competition';
-import {PlaystepPage} from '../pages/playstep/playstep';
+import { PlaystepPage } from '../pages/playstep/playstep';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any =  HomePage;
+  rootPage: any = ListPage;//PlaystepPage;//HomePage;
 
-  pages: Array<{title: string, component: any,icon: string,color:any}>;
+  pages: Array<{ title: string, component: any, icon: string, color: any }>;
 
-  constructor(public platform: Platform, 
-    public statusBar: StatusBar, 
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
     private modal: ModalController,
     public popoverCtrl: PopoverController,
     public splashScreen: SplashScreen) {
@@ -30,10 +30,11 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage ,icon:'football',color:'danger'},
-      { title: 'step', component: PlaystepPage ,icon:'fastforward',color:'ballstep'},
-      { title: 'ตั้งค่า', component: CompetitionPage ,icon:'cog',color:'dark'},
-      { title: 'Livescore', component: LivescorePage ,icon:'globe',color:'secondary'}
+      { title: 'บอล', component: HomePage, icon: 'football', color: 'danger' },
+      { title: 'บอลstep', component: PlaystepPage, icon: 'fastforward', color: 'ballstep' },
+      { title: 'หวยไทย', component: ListPage, icon: 'calculator', color: 'lotto' },  
+      { title: 'ตั้งค่า', component: CompetitionPage, icon: 'cog', color: 'dark' },
+      { title: 'Livescore', component: LivescorePage, icon: 'globe', color: 'secondary' }
     ];
 
   }

@@ -5,14 +5,102 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>playstep</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title><span class="label">เล่นแบบสเต็บ</span></ion-title>
   </ion-navbar>
-
 </ion-header>
+<ion-content>
+  
+  <table class="pure-table pure-table-bordered" width="100%" *ngIf="temptableshow">
+    <thead>
+      <tr>
+        <th width="10%">*</th>
+        <th width="50%">คู่</th>
+        <th width="20%">ต่อ</th>
+        <th width="10%">เหย้า</th>
+        <th width="10%">เยือน</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of listdatashow;let i=index">
+        <td><span class="matchtime">{{i+1}}</span></td>
+        <td>
+          <span class="matchhost" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'host','blue')">
+            {{match.hostname}}</span>
+          <span class="matchvisit" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'host','red')">
+            {{match.hostname}}</span>
 
+          <span class="matchvs"> VS </span>
 
-<ion-content padding>
+          <span class="matchvisit" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'visit','red')">
+            {{match.visitname}}</span>
+          <span class="matchhost" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'visit','blue')">{{match.visitname}}</span>
 
+        </td>
+        <td><span class="rate">{{match.rate}}</span></td>
+        <td>
+          <span class="matchhost" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'host','blue')">{{match.hostrate}}
+          </span>
+          <span class="matchvisit" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'host','red')">{{match.hostrate}}
+          </span>
+        </td>
+
+        <td>
+
+          <span class="matchvisit" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'visit','red')">{{match.visitrate}}</span>
+          <span class="matchhost" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'visit','blue')">{{match.visitrate}}</span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <hr>
+  <table class="pure-table pure-table-bordered" width="100%">
+    <thead>
+      <tr>
+        <th width="10%">*</th>
+        <th width="50%">คู่</th>
+        <th width="20%">ต่อ</th>
+        <th width="10%">เหย้า</th>
+        <th width="10%">เยือน</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let match of Fire2">
+        <td><span class="matchtime">{{match.timecom}}</span></td>
+        <td>
+          <span class="matchhost" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'host','blue')">
+            {{match.hostname}}</span>
+          <span class="matchvisit" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'host','red')">
+            {{match.hostname}}</span>
+
+          <span class="matchvs"> VS </span>
+
+          <span class="matchvisit" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'visit','red')">
+            {{match.visitname}}</span>
+          <span class="matchhost" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'visit','blue')">{{match.visitname}}</span>
+
+        </td>
+        <td><span class="rate">{{match.rate}}</span></td>
+        <td>
+          <span class="matchhost" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'host','blue')">{{match.hostrate}}
+          </span>
+          <span class="matchvisit" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'host','red')">{{match.hostrate}}
+          </span>
+        </td>
+
+        <td>
+
+          <span class="matchvisit" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'visit','red')">{{match.visitrate}}</span>
+          <span class="matchhost" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'visit','blue')">{{match.visitrate}}</span>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
 </ion-content>

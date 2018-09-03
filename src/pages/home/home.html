@@ -25,12 +25,13 @@
               <tr *ngFor="let match of Fire2">
                   <td><span class="matchtime">{{match.timecom}}</span></td>
                   <td>
-                    <span class="matchhost" *ngIf="match.hostrate > match.visitrate"> {{match.hostname}}</span> 
-                   <span class="matchvisit" *ngIf="match.hostrate < match.visitrate"> {{match.hostname}}</span> 
+                    <span class="matchhost" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'host','blue')"> {{match.hostname}}</span> 
+                   <span class="matchvisit" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'host','red')"> {{match.hostname}}</span> 
          
                     <span class="matchvs"> VS </span> 
-                    <span class="matchhost" *ngIf="match.hostrate < match.visitrate">{{match.visitname}}</span>
-                    <span class="matchvisit" *ngIf="match.hostrate > match.visitrate"> {{match.visitname}}</span>
+                    
+                    <span class="matchvisit" *ngIf="match.hostrate > match.visitrate" (click)="clickhost(match,'visit','red')"> {{match.visitname}}</span>
+                    <span class="matchhost" *ngIf="match.hostrate < match.visitrate" (click)="clickhost(match,'visit','blue')">{{match.visitname}}</span>
                     
                   </td>
                   <td><span class="rate">{{match.rate}}</span></td>

@@ -3,21 +3,166 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title><span class="label">{{title}}</span></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
+
+  <div *ngIf="selectedSection=='tabOne'">
+    <form [formGroup]="todo" (ngSubmit)="addlot2t()">
+      <table class="table table-bordered" width="100%">
+        <thead class="thead-dark">
+          <tr class="center">
+            <th>2ตัว</th>
+            <th>บาท</th>
+            <th>บน</th>
+            <th>ล่าง</th>
+            <th>โต๊ด</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tdcenterinput"><input [(ngModel)]="lot2t.numtxt" type="text" formControlName="numtxt" name="numtxt"
+                minlength="2" maxlength="2" class="num2" /></td>
+            <td class="tdcenterinput"><input [(ngModel)]="lot2t.money" type="number" formControlName="money" name="money"
+                class="num2" /></td>
+            <td class="tdcenter">
+              <ion-checkbox [(ngModel)]="lot2t.bon" formControlName="bon" name="bon"></ion-checkbox>
+            </td>
+            <td class="tdcenter">
+              <ion-checkbox [(ngModel)]="lot2t.lang" formControlName="lang" name="lang"></ion-checkbox>
+            </td>
+            <td class="tdcenter">
+              <ion-checkbox [(ngModel)]="lot2t.tod" formControlName="tod" name="tod"></ion-checkbox>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ion-list>
+        <ion-item>
+
+          <button ion-button outline item-end icon-start type="submit">
+            <ion-icon name="star"></ion-icon>
+            เพิ่ม
+          </button>
+        </ion-item>
+      </ion-list>
+    </form>
+
+
   </div>
+  <div *ngIf="selectedSection =='tabTwo'">
+    <form [formGroup]="todo" (ngSubmit)="addlot3t()">
+      <table class="table table-bordered" width="100%">
+        <thead class="thead-dark">
+          <tr class="center">
+            <th width="30%">3ตัว</th>
+            <th width="40%">บาท</th>           
+            <th width="30%">โต๊ด</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tdcenterinput"><input [(ngModel)]="lot3t.numtxt" formControlName="numtxt" name="numtxt" type="text"
+                minlength="3" maxlength="3" class="num2" /></td>
+            <td class="tdcenterinput"><input [(ngModel)]="lot3t.money" formControlName="money" name="money" type="number"
+                class="num2" /></td>
+            <td class="tdcenter">
+              <ion-checkbox [(ngModel)]="lot3t.tod3" formControlName="tod3" name="tod3"></ion-checkbox>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ion-list>
+        <ion-item>
+
+          <button ion-button outline item-end icon-start type="submit">
+            <ion-icon name="star"></ion-icon>
+            เพิ่ม
+          </button>
+        </ion-item>
+      </ion-list>
+
+    </form>
+  </div>
+
+  <div *ngIf="selectedSection =='tabThree'">
+    <form [formGroup]="todo" (ngSubmit)="addlotpt()">
+      <table class="table table-bordered" width="100%">
+        <thead class="thead-dark">
+          <tr class="center">
+            <th width="50%">บาท</th>
+            <th width="10%">1</th>
+            <th width="10%">2</th>
+            <th width="10%">3</th>
+            <th width="10%">4</th>
+            <th width="10%">5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tdcenterinput"><input [(ngModel)]="lotpt.money"     formControlName="money"  name="money"  type="number" class="num2" /></td>
+            <td class="tdcenterinput"><input [(ngModel)]="lotpt.numtxt1"   formControlName="numtxt1" name="numtxt1" type="text" minlength="1" maxlength="1" class="numpouang" /></td>
+            <td class="tdcenterinput"><input [(ngModel)]="lotpt.numtxt2"   formControlName="numtxt2" name="numtxt2" type="text" minlength="1" maxlength="1" class="numpouang" /></td>
+            <td class="tdcenterinput"><input [(ngModel)]="lotpt.numtxt3"   formControlName="numtxt3" name="numtxt3" type="text" minlength="1" maxlength="1" class="numpouang" /></td>
+            <td class="tdcenterinput"><input [(ngModel)]="lotpt.numtxt4"   formControlName="numtxt4" name="numtxt4" type="text" minlength="1" maxlength="1" class="numpouang" /></td>
+            <td class="tdcenterinput"><input [(ngModel)]="lotpt.numtxt5"   formControlName="numtxt5" name="numtxt5" type="text" minlength="1" maxlength="1" class="numpouang" /></td>
+
+          </tr>
+        </tbody>
+      </table>
+      <ion-list>
+        <ion-item>
+
+          <button ion-button outline item-end icon-start type="submit">
+            <ion-icon name="star"></ion-icon>
+            เพิ่ม
+          </button>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+
+  <hr>
+  <!-- {{lot2tsave | json }} -->
+  <table class="table table-bordered" width="100%">
+    <thead class="thead-dark">
+      <tr class="center">
+        <th>หวย</th>
+        <th>บาท</th>
+        <th>ซื้อ</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of lot2tsave;let i=index">
+        <td>{{t.numtxt}}</td>
+        <td>{{t.money}}</td>
+        <td>{{t.whatpay}}</td>
+
+
+      </tr>
+      <tr>
+        <td colspan="5" class="grandtotal">รวมเงิน {{grandtotal}} บาท ส่วนลด 20% {{grandtotal-(grandtotal*20/100)}} บาท</td>
+      </tr>
+    </tbody>
+  </table>
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-segment [(ngModel)]="selectedSection" color="light" (click)="showtab()">
+      <ion-segment-button value="tabOne">
+        <span class="two">เลข 2 ตัว</span>
+      </ion-segment-button>
+      <ion-segment-button value="tabTwo">
+        <span class="three"> เลข 3 ตัว</span>
+      </ion-segment-button>
+      <ion-segment-button value="tabThree">
+        <span class="poung"> หวยพวง</span>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
