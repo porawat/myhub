@@ -23,12 +23,20 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { IonicStorageModule } from '@ionic/storage';
 import { Sim } from '@ionic-native/sim';
+import { Uid } from '@ionic-native/uid';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera} from '@ionic-native/camera';
 import { DatePicker } from '@ionic-native/date-picker';
 import {MyDatePickerModule} from 'mydatepicker';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+import { Keyboard } from '@ionic-native/keyboard';
+import {FocuserDirective} from '../directives/focuser/focuser';
+import { Device } from '@ionic-native/device';
+import { Firebase } from '@ionic-native/firebase';
+import { FcmProvider } from '../providers/fcm/fcm';
+// import {enableProdMode} from '@angular/core';
+// enableProdMode();
 @NgModule({
   declarations: [
     MyApp,
@@ -40,12 +48,22 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     CompeterPage,
     RatecalculatorPage,
     LivescorePage,
-    PlaystepPage
+    PlaystepPage,
+    FocuserDirective
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot({name: "__ion_APHUB"}), //ฐานข้อมูลในเครื่อง
+    IonicModule.forRoot(MyApp,{
+      backButtonText: 'Go Back',
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',
+      tabsPlacement: 'bottom',
+      pageTransition: 'ios-transition',
+      activator:'none',
+      transition :'ios-transition'
+    }),
+    IonicStorageModule.forRoot(), //ฐานข้อมูลในเครื่อง
     AngularFireModule.initializeApp(Firebase_Config.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -72,10 +90,16 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FireserviceProvider,
     Sim,
+    Uid,
+    Firebase,
+    Device,
+    AndroidPermissions,
+    Keyboard,
     Facebook,
     InAppBrowser,
     Camera,
     DatePicker,
+    FcmProvider,
     
   ]
 })

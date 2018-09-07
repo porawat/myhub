@@ -1,3 +1,6 @@
+import { Timestamp } from "rxjs";
+import { DateTime } from "ionic-angular";
+
 export interface User {
   uid: string;
   email: string;
@@ -11,5 +14,16 @@ export interface User {
     pair: string;
     sender: string;
     time: number;
+  }
+  export interface ThaiHD {
+    hdid: string;
+    uid: string;
+    ngud: string;
+    ngudlabel:string
+    timestamp:number,
+    order:any,
+    orderstatus:string,
+    payvalue:number
+
   }
   

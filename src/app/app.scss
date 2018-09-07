@@ -1,4 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Amaranth|Baloo+Tammudu|Kanit:400,400i,700|Kosugi+Maru|Prompt:400,400i,700|Roboto+Mono:400,400i,500,500i,700,700i|Volkhov&subset=thai');
+.avatar{
+    margin: auto;
+ }
+ span.label{
+    font-family: Prompt;   
+}
+ .card-background-page {
+    background-color: #00ADCA;
+ }
+ .profile-image-wrapper {
+    text-align: center;
+    margin: 20px 0;
 
+    .profile-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+
+      display: inline-block;
+
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .profile-image-placeholder {
+      display: inline-block;
+
+      background-color: #eee;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+
+      font-size: 12px;
+
+      ion-icon {
+        font-size: 44px;
+        margin-bottom: -10px;
+        margin-top: 10px;
+      }
+    }
+    .tile{
+      font-family: 'Pacifico', cursive;
+      font-size: 10px;
+      font-style: italic;
+    
+    }
+  }
 // http://ionicframework.com/docs/theming/
 
 

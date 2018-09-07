@@ -3,12 +3,29 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><span class="label">{{title}}</span></ion-title>
+    <ion-title><span class="label">{{title}}</span> token:{{tokenName}}:{{tokenValue}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-
+<h3 class="center"> รายการสั่งซื้อ </h3>
+<table  class="pure-table pure-table-bordered" width="100%">
+    <thead>
+      <tr class="center">
+        <th>งวด</th>
+        <th>รวมเป็นเงิน</th>
+        <th>จำนวนเลข</th>          
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let hd of myhdorder  " class="center">
+        <td>{{hd.ngudlabel}}</td>
+        <td>{{hd.payvalue}}</td>
+        <td>{{hd.order.length}}</td>      
+      </tr>
+      <tr><td colspan="3" class="center">รวมเงิน : {{grandhdtotal}} บาท (<span style="color:darkred">จ่ายแล้ว</span>)</td></tr>
+      </tbody>
+      </table>
   <div *ngIf="selectedSection=='tabOne'">
     <form [formGroup]="todo" (ngSubmit)="addlot2t()">
       <table class="table table-bordered" width="100%">
@@ -23,18 +40,21 @@
         </thead>
         <tbody>
           <tr>
-            <td class="tdcenterinput"><input [(ngModel)]="lot2t.numtxt" type="text" formControlName="numtxt" name="numtxt"
-                minlength="2" maxlength="2" class="num2" /></td>
+            <td class="tdcenterinput">
+              <input [(ngModel)]="lot2t.numtxt" type="text" formControlName="numtxt" name="numtxt"
+                minlength="2" maxlength="2" class="num2"  #focus/>
+              </td>
+
             <td class="tdcenterinput"><input [(ngModel)]="lot2t.money" type="number" formControlName="money" name="money"
                 class="num2" /></td>
             <td class="tdcenter">
-              <ion-checkbox [(ngModel)]="lot2t.bon" formControlName="bon" name="bon"></ion-checkbox>
+              <ion-checkbox   [(ngModel)]="lot2t.bon" formControlName="bon" name="bon"></ion-checkbox>
             </td>
             <td class="tdcenter">
-              <ion-checkbox [(ngModel)]="lot2t.lang" formControlName="lang" name="lang"></ion-checkbox>
+              <ion-checkbox   [(ngModel)]="lot2t.lang" formControlName="lang" name="lang"></ion-checkbox>
             </td>
             <td class="tdcenter">
-              <ion-checkbox [(ngModel)]="lot2t.tod" formControlName="tod" name="tod"></ion-checkbox>
+              <ion-checkbox  [(ngModel)]="lot2t.tod" formControlName="tod" name="tod"></ion-checkbox>
             </td>
           </tr>
         </tbody>
@@ -127,7 +147,7 @@
 
   <hr>
   <!-- {{lot2tsave | json }} -->
-  <table class="table table-bordered" width="100%">
+  <table class="table table-bordered" width="100%" *ngIf="canpay!==0">
     <thead class="thead-dark">
       <tr class="center">
         <th>หวย</th>
@@ -148,8 +168,15 @@
       <tr>
         <td colspan="5" class="grandtotal">รวมเงิน {{grandtotal}} บาท ส่วนลด 20% {{grandtotal-(grandtotal*20/100)}} บาท</td>
       </tr>
+      <tr>
+          <td colspan="5" class="center"><button ion-button icon-right (click)="payorder()">
+              ยืนยันคำสั่งซื้อ
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </button></td>
+        </tr>
     </tbody>
   </table>
+
 </ion-content>
 <ion-footer>
   <ion-toolbar color="dark">
@@ -161,7 +188,7 @@
         <span class="three"> เลข 3 ตัว</span>
       </ion-segment-button>
       <ion-segment-button value="tabThree">
-        <span class="poung"> หวยพวง</span>
+        <span class="poung">หวยพวง</span>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
