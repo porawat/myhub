@@ -37,11 +37,11 @@ export class FcmProvider {
   private saveTokenToFirestore(token) {
     if (!token) return;
 
-  const devicesRef = this.afs.collection('devices')
+  const devicesRef = this.afs.collection('users')
 
   const docData = { 
     token,
-    userId: 'testUser',
+    userId: '141720789322',
   }
 
   return devicesRef.doc(token).set(docData)

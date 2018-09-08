@@ -16,9 +16,8 @@ import { LivescorePage } from '../pages/livescore/livescore';
 import { CompetitionPage } from '../pages/competition/competition';
 import { PlaystepPage } from '../pages/playstep/playstep';
 import { FireserviceProvider } from '../providers/fireservice/fireservice';
-import { FcmProvider } from '../providers/fcm/fcm';
-import { Subject } from 'rxjs/Subject';
-import { tap } from 'rxjs/operators';
+// import { FcmProvider } from '../providers/fcm/fcm';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -37,7 +36,6 @@ export class MyApp {
     public statusBar: StatusBar,
     public db: AngularFirestore,
     public storage: Storage,
-    public fcm: FcmProvider, 
     public toastCtrl: ToastController,
     public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -66,9 +64,10 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.setonline(true);
-      this.fcm.getToken()
+      //this.fcm.getToken()
 
       // Listen to incoming messages
+      /*
       this.fcm.listenToNotifications().pipe(
         tap(msg => {
           // show a toast
@@ -80,6 +79,7 @@ export class MyApp {
         })
       )
       .subscribe()
+      */
     });
     if (this.fbservice.getUid()) {
 
